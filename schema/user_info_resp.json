@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "User info response",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string",
+            "description": "Display name of the user"
+        },
+        "mail": {
+            "type": "string"
+        },
+        "session": {
+            "type":"object",
+            "description": "Information on the current session",
+            "properties": {
+                "role": {
+                    "type": "string",
+                    "enum": ["member", "coach", "admin"]
+                }
+            }
+        }
+    }
+}

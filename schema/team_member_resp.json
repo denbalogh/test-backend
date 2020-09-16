@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title" : "Team member response",
+    "type" : "object",
+    "properties" : {
+        "members" : {
+            "type" : "array",
+            "description": "List of team members",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id" : {
+                        "type": "string",
+                        "description": "User ID"
+                    },
+                    "name" : {
+                        "type": "string",
+                        "description": "Name, if available"
+                    },
+                    "mail" : {
+                        "type": "string",
+                        "description": "User mail"
+                    },
+                    "role": {
+                        "type":"string",
+                        "description": "Role for the user in this team.",
+                        "enum": ["manager", "coach", "member", "reader"]
+                    }
+                }
+            }
+        }
+    }
+}

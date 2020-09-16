@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title" : "Add team member request",
+    "type" : "object",
+    "properties" : {
+        "members" : {
+            "type" : "array",
+            "description": "List of team members",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "mail": {
+                        "type":"string",
+                        "format":"email"
+                    },
+                    "role": {
+                        "type":"string",
+                        "description": "Specifies the role within the team. Defaults to `member`.",
+                        "enum": ["manager", "coach", "member", "reader"],
+                        "default": "member"
+                    }
+                },
+                "required":["mail"]
+            }
+        }
+    }
+}

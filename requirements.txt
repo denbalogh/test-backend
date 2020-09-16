@@ -1,0 +1,12 @@
+flask
+flask-cors
+flask-migrate
+flask-sqlalchemy
+psycopg2-binary
+jsonschema
+python-dotenv
+redis
+requests
+simplejson
+sqlalchemy
+sqlalchemy-utils

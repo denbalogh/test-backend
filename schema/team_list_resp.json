@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Team list response",
+    "type": "object",
+    "properties": {
+        "teams": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id" : {
+                        "type": "string",
+                        "description": "ID of the team"
+                    },
+                    "name" : {
+                        "type": "string",
+                        "description": "Name of the team"
+                    }
+                }
+            }
+        }
+    }
+}

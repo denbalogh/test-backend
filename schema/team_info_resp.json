@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title" : "Team info response",
+    "type" : "object",
+    "properties" : {
+        "name" : {
+            "type" : "string",
+            "minLength" : 1
+        },
+        "members" : {
+            "type" : "array",
+            "description": "List of team members",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "id": {
+                        "type":"string"
+                    },
+                    "mail": {
+                        "type":"string",
+                        "format":"email"
+                    },
+                    "role": {
+                        "type":"string",
+                        "description": "Role for the user in this team."
+                    }
+                }
+            }
+        }
+    }
+}

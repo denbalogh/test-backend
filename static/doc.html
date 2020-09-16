@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fable+ Team-Performance-App API</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        var fableTheme = {
+            spacing: {
+                unit: 5,
+                sectionHorizontal: ({ spacing }) => spacing.unit * 8,
+                sectionVertical: ({ spacing }) => spacing.unit * 8,
+            },
+            breakpoints: {
+                small: '50rem',
+                medium: '85rem',
+                large: '105rem',
+            },
+            colors: {
+                tonalOffset: 0.3,
+                primary: {
+                    main: '#ff007a',
+                },
+                text: {
+                    primary: '#333333',
+                },
+                border: {
+                    dark: 'rgba(0,0,0, 0.1)',
+                    light: '#ffffff',
+                },
+                http: {
+                    get: '#6bbd5b',
+                    post: '#248fb2',
+                    put: '#9b708b',
+                    options: '#d3ca12',
+                    patch: '#e09d43',
+                    delete: '#e27a7a',
+                    basic: '#999',
+                    link: '#31bbb6',
+                    head: '#c167e4',
+                },
+            },
+            schema: {
+                defaultDetailsWidth: '75%',
+                typeNameColor: theme => theme.colors.text.secondary,
+                typeTitleColor: theme => theme.schema.typeNameColor,
+                requireLabelColor: theme => theme.colors.error.main,
+                labelsTextSize: '0.9em',
+                nestingSpacing: '1em',
+                nestedBackground: '#fafafa',
+                arrow: {
+                    size: '1.1em',
+                    color: theme => theme.colors.text.secondary,
+                },
+            },
+            typography: {
+                fontSize: '14px',
+                lineHeight: '1.5em',
+                fontWeightRegular: '400',
+                fontWeightBold: '600',
+                fontWeightLight: '300',
+                fontFamily: 'Roboto, sans-serif',
+                smoothing: 'antialiased',
+                optimizeSpeed: true,
+                headings: {
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: '400',
+                    lineHeight: '1.6em',
+                    color: '#333333',
+                    textColor: '#333333',
+                },
+                code: {
+                    fontSize: '13px',
+                    fontFamily: 'Courier, monospace',
+                    lineHeight: ({ typography }) => typography.lineHeight,
+                    fontWeight: ({ typography }) => typography.fontWeightRegular,
+                    color: '#e53935',
+                    backgroundColor: 'rgba(38, 50, 56, 0.05)',
+                    wrap: false,
+                },
+                links: {
+                    color: ({ colors }) => colors.primary.main,
+                    visited: ({ typography }) => typography.links.color,
+                },
+            },
+            menu: {
+                width: '260px',
+                backgroundColor: '#292e3a',
+                textColor: '#fafafa',
+                groupItems: {
+                    textTransform: 'uppercase',
+                },
+                level1Items: {
+                    textTransform: 'none',
+                },
+                arrow: {
+                    size: '1.5em',
+                    color: theme => theme.menu.textColor,
+                },
+            },
+            logo: {
+                maxHeight: ({ menu }) => menu.width,
+                maxWidth: ({ menu }) => menu.width,
+                gutter: '40px',
+            },
+            rightPanel: {
+                backgroundColor: '#3a4052',
+                width: '40%',
+                textColor: '#ffffff',
+            },
+        };
+    </script>
+</head>
+
+<body>
+    <!-- <redoc spec-url='/healthcheck/v1/static/openapi.yaml' show-extensions></redoc> -->
+    <div id="redoc"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+    <script>
+        Redoc.init('/tpa/v1/static/openapi.yaml', {
+            showExtensions: true,
+            theme: fableTheme,
+        }, document.getElementById('redoc'));
+    </script>
+</body>
+
+</html>

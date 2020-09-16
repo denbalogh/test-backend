@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title" : "Registration request",
+    "description" : "Registration request",
+    "type" : "object",
+    "properties" : {
+        "name" : {
+            "type" : "string",
+            "minLength" : 1
+        },
+        "mail" : {
+            "type" : "string",
+            "format" : "email"
+        },
+        "password" : {
+            "type" : "string",
+            "minLength" : 1
+        },
+        "role" : {
+            "type" : "string",
+            "enum" : ["member", "coach", "admin"]
+        }
+    },
+    "additionalProperties" : false,
+    "required" : ["mail", "password"]
+}

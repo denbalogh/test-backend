@@ -1,0 +1,11 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "User login response",
+    "type": "object",
+    "properties": {
+        "token": {
+            "type": "string",
+            "description": "Session token used for authorization"
+        }
+    }
+}

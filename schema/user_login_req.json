@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title" : "Login request",
+    "description" : "Login request",
+    "type" : "object",
+    "properties" : {
+        "mail" : {
+            "type" : "string",
+            "format" : "email"
+        },
+        "password" : {
+            "type" : "string",
+            "minLength" : 1
+        },
+        "role": {
+            "type": "string",
+            "description": "If the user has multiple roles, the role for the session needs to be specified on login."
+        }
+    },
+    "additionalProperties" : false,
+    "required" : ["mail", "password"]
+}
