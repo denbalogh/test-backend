@@ -14,6 +14,8 @@ class User(db.Model): # type: ignore
     name = db.Column(db.String)
     
     mail = db.Column(db.String, unique=True)
+    
+    trial_period_expire_date = db.Column(db.DateTime, nullable=True, default=None)
 
     registered = db.Column(db.Boolean)
 
