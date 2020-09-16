@@ -51,7 +51,7 @@ def create_user(mail: str, role: SystemRole=None, password: str=None, name: str=
 
         return u
 
-def update_user(user, mail=None, role=None, password=None, name=None, hideTutorials=None):
+def update_user(user, mail=None, role=None, password=None, name=None, hideTutorials=None, trial_period_expire_date=None):
         if mail is not None:
             user.mail = mail
 
@@ -60,6 +60,12 @@ def update_user(user, mail=None, role=None, password=None, name=None, hideTutori
 
         if name is not None:
             user.name = name
+            
+        if trial_period_expire_date is not None:
+            user.trial_period_expire_date = trial_period_expire_date
+            
+        if trial_period_expire_date is 'delete':
+            user.trial_period_expire_date = None
 
         if password is not None:
             password_salt = hash_password(str(time.time()) + str(random.random()))
