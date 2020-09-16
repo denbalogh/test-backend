@@ -16,7 +16,7 @@ IN_DOCKER = os.environ.get("IN_DOCKER", "false").lower() == "true"
 
 BASE_ROUTE = "/tpa/v" + VERSION
 
-DEFAULT_REDIS = "redis:6379"
+DEFAULT_REDIS = "localhost:6379"
 DEFAULT_DB = "sqlite:///dev.db"
 
 REDIS = os.environ.get("REDIS_HOST", DEFAULT_REDIS)
