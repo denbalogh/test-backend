@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title" : "Set trial period",
+    "description" : "Set trial period for a user",
+    "type" : "object",
+    "properties" : {
+        "user_id" : {
+            "type" : "string"
+        },
+        "in_the_past" : {
+            "type" : "boolean",
+            "default": false
+        }
+    },
+    "additionalProperties" : false,
+    "required" : ["user_id", "in_the_past"]
+}
