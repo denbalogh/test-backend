@@ -4,6 +4,7 @@ Blueprint defining routes for user and session management.
 """
 
 import json
+import datetime
 
 from flask import Blueprint, g, request
 
@@ -18,12 +19,21 @@ from util import response, validate, hash_password
 from util.structs import UserInputDict
 
 user = Blueprint("user", __name__)
+TRIAL_PERIOD = 7
+
+def check_trial(user):
+    # Check for trial period
+    if user.trial_period_expire_date is not None and user.trial_period_expire_date < datetime.datetime.now():
+        raise TrialPeriodExpiredError()
 
 @user.route("/info", methods=["GET"])
 def getUserInfo():
     user_id = g.session["userID"]
 
     u = controller.get_user_by_id(user_id)
+    
+    # Check for trial period
+    check_trial(u)
     
     payload = {
         "id"   : str(u.id)
@@ -34,6 +44,9 @@ def getUserInfo():
 
     if u.name is not None:
         payload["name"] = u.name
+        
+    if u.trial_period_expire_date is not None:
+        payload["trial_period_expire_date"] = u.trial_period_expire_date
 
     session = {}
     if g.session["userRole"] != "coach":
@@ -92,7 +105,47 @@ def updateUser():
         raise APIException(message="This user role cannot be registered using this path at the moment", status_code=403)
     
     u = controller.get_user_by_id(g.session["userID"])
+    
+    # Check for trial period
+    check_trial(u)
+    
     controller.update_user(u, **g.payload)
+
+    return response(success=True)
+
+@user.route("/trial", methods=["PUT"])
+@validate("user_trial_add_req")
+def setUserTrialPeriod():
+    user_id = g.session["userID"]
+    session_user = controller.get_user_by_id(user_id)
+    if session_user.role not in [SystemRole.GLOBAL_ADMIN.value]:
+        raise APIException(message="Only global admin has access to this endpoint", status_code=403)
+    
+    target_user_id = g.payload["user_id"]
+    target_user = controller.get_user_by_id(target_user_id)
+    in_the_past = g.payload["in_the_past"]
+    
+    if in_the_past:
+        end_date = datetime.datetime.now() - datetime.timedelta(days=TRIAL_PERIOD)
+    else:
+        end_date = datetime.datetime.now() + datetime.timedelta(days=TRIAL_PERIOD)
+        
+    controller.update_user(target_user, trial_period_expire_date=end_date)
+
+    return response(success=True)
+
+@user.route("/trial", methods=["DELETE"])
+@validate("user_trial_remove_req")
+def removeUserTrialPeriod():
+    user_id = g.session["userID"]
+    session_user = controller.get_user_by_id(user_id)
+    if session_user.role not in [SystemRole.GLOBAL_ADMIN.value]:
+        raise APIException(message="Only global admin has access to this endpoint", status_code=403)
+    
+    target_user_id = g.payload["user_id"]
+    target_user = controller.get_user_by_id(target_user_id)
+    
+    controller.update_user(target_user, trial_period_expire_date="delete")
 
     return response(success=True)
 
