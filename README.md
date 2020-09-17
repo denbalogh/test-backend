@@ -12,7 +12,7 @@
   tests/test_session.py::test_trial_period_not_expired PASSED                                                                                                                       [ 90%]
   tests/test_session.py::test_trial_period_expired PASSED  
   ```
-- Extended `OpenAPI`([source](https://github.com/denbalogh/test-backend/blob/master/openapi_full.yaml#L218)) specification to cover new use cases including request and response schemas.
+- Extended `OpenAPI`([source](https://github.com/denbalogh/test-backend/blob/master/openapi_full.yaml#L218)) specification to cover new use cases including request([source](https://github.com/denbalogh/test-backend/blob/master/openapi_full.yaml#L459)) and response schemas.
   ![user-trial-put](https://user-images.githubusercontent.com/23406415/93450793-ac8f8c80-f8d6-11ea-9a9b-037223e4dc9d.png)
   ![user-trial-delete](https://user-images.githubusercontent.com/23406415/93450785-a9949c00-f8d6-11ea-9710-f31e3a4415d0.png)
 
