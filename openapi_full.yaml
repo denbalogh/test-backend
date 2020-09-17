@@ -218,7 +218,7 @@ paths:
   /user/trial:
     put:
       operationId: setTrialPeriod
-      description: Sets trial period for given user to end in 7 days
+      description: Sets trial period for given user. The trial period is 7 days. It can be set in the future or in the past(test purposes).
       tags:
       - User
       responses:
