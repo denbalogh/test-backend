@@ -215,6 +215,49 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/successResponse"
+  /user/trial:
+    put:
+      operationId: setTrialPeriod
+      description: Sets trial period for given user to end in 7 days
+      tags:
+      - User
+      responses:
+        '200':
+          description: User trial period was set
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successResponse'
+        '403':
+          description: Only user with global admin role has access
+          x-ErrorCode: 1201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/userTrialAddRequest'
+    delete:
+      operationId: deleteTrialPeriod
+      description: Deletes trial period for given user
+      tags:
+      - User
+      responses:
+        '200':
+          description: User trial period was deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successResponse'
+        '403':
+          description: Only user with global admin role has access
+          x-ErrorCode: 1201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/userTrialDeleteRequest'
   /team:
     get:
       operationId: listTeams
@@ -413,6 +456,36 @@ components:
               showTutorial:
                 type: boolean
             additionalProperties: false
+    userTrialAddRequest:
+      content:
+        application/json:
+          schema:
+            title: Set trial period
+            description: Set trial period for a user
+            type: object
+            properties:
+              user_id:
+                type: string
+              in_the_past:
+                type: boolean
+                default: false
+            additionalProperties: false            
+            required:
+              - user_id
+              - in_the_past
+    userTrialDeleteRequest:
+      content:
+        application/json:
+          schema:
+            title: Delete trial period
+            description: Delete trial period for a user
+            type: object
+            properties:
+              user_id:
+                type: string
+            additionalProperties: false            
+            required:
+              - user_id
     teamCreateRequest:
       content:
         application/json:

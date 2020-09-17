@@ -219,6 +219,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/successResponse'
+
+  /user/trial:
+    put:
+      operationId: setTrialPeriod
+      description: Sets trial period for given user to end in 7 days
+      tags:
+      - User
+      responses:
+        '200':
+          description: User trial period was set
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successResponse'
+        '403':
+          description: Only user with global admin role has access
+          x-ErrorCode: 1201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/userTrialAddRequest'
+    delete:
+      operationId: deleteTrialPeriod
+      description: Deletes trial period for given user
+      tags:
+      - User
+      responses:
+        '200':
+          description: User trial period was deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/successResponse'
+        '403':
+          description: Only user with global admin role has access
+          x-ErrorCode: 1201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/userTrialDeleteRequest'
   #endregion
 
   #region team
@@ -377,6 +421,16 @@ components:
         application/json:
           schema:
             $ref: user_update_req.json
+    userTrialAddRequest:
+      content:
+        application/json:
+          schema:
+            $ref: user_trial_add_req.json
+    userTrialDeleteRequest:
+      content:
+        application/json:
+          schema:
+            $ref: user_trial_delete_req.json
 
     teamCreateRequest:
       content:
